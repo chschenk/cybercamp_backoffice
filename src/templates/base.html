@@ -34,27 +34,33 @@
 		<div class="collapse navbar-collapse" id="navbarToggler">
 			<a class="navbar-brand" href="{#% url 'portal:available-appvolumes' %#}">Cybercamp</a>
 				<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-					<li class="nav-item {% block event_active %}{% endblock %}">
-						<a class="nav-link" href="{#% url 'portal:list-event' %#}">{% trans "Manage events" %}</a>
-					</li>
-					<li class="nav-item {% block appvolume_active %}{% endblock %}">
-						<a class="nav-link" href="{#% url 'portal:list-appvolume' %#}">{% trans "Manage AppVolumes" %}</a>
-					</li>
-					<li class="nav-item {% block clientgroup_active %}{% endblock %}">
-						<a class="nav-link" href="{#% url 'portal:list-clientgroup' %#}">{% trans "Manage client groups" %}</a>
-					</li>
+					{% if user.is_authenticated %}
+						<li class="nav-item">
+							<a class="nav-link" href="">Zum Cybercamp</a>
+						</li>
+						<li class="nav-item {% block timetable_active %}{% endblock %}">
+							<a class="nav-link" href="{#% url 'camp:timetable' %#}">Zeitplan</a>
+						</li>
+						<li class="nav-item {% block workshop_active %}{% endblock %}">
+							<a class="nav-link" href="{#% url 'camp:list-workshops' %#}">Workshop Übersicht</a>
+						</li>
+						<li class="nav-item {% block add_workshop_active %}{% endblock %}">
+							<a class="nav-link" href="{#% url 'camp:create-workshop' %#}">Workshop einreichen</a>
+						</li>
+					{% endif %}
 				</ul>
+
 			<ul class="navbar-nav ml-auto mt-rg-0">
 				{% if user.is_authenticated %}
 					<li class="nav-item pl-5">
-						<div class="navbar-text">{% blocktrans %}Logged in as {{user}}{% endblocktrans %}</div>
+						<div class="navbar-text">Eingeloggt als {{user}}</div>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="{#% url 'portal:logout' %#}">{% trans "Logout" %}</a>
+						<a class="nav-link" href="{% url 'logout' %}">{% trans "Logout" %}</a>
 					</li>
 				{% else %}
 					<li class="nav-item {% block login_active %}{% endblock %}">
-						<a class="nav-link" href="{#% url 'portal:login' %#}">{% trans "Login" %}</a>
+						<a class="nav-link" href="{% url 'login' %}">{% trans "Login" %}</a>
 					</li>
 				{% endif %}
 			</ul>
