@@ -1,0 +1,5 @@
+Hallo bla
+
+http://{{ site.domain }}{% url 'django_registration_activate' activation_key %}
+
+Der Link ist für {{ expiration_days }} Tage gültig.
