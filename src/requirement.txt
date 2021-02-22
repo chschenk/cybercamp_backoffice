@@ -1,3 +1,0 @@
-django
-django-bootstrap4
-django-registration==3.1.1
