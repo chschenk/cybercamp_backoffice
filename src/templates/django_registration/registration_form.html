@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% load bootstrap4 %}
+{% load i18n %}
+
+{% block title %}Cybercamp Registrierung{% endblock %}
+{% block header %}Cybercamp Registrierung{% endblock %}
+{% block body %}
+    <form method="post" class="form">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        {% buttons %}
+            <button type="submit" class="btn btn-primary">Registrieren</button>
+        {% endbuttons %}
+    </form>
+{% endblock %}
