@@ -15,10 +15,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
+from cybercamp_backoffice.camp.forms import UserRegistrationForm
+from django_registration.backends.activation.views import RegistrationView
 
 urlpatterns = [
     path('', include("cybercamp_backoffice.camp.urls")),
     path('admin/', admin.site.urls),
+    path('accounts/register/', RegistrationView.as_view(form_class=UserRegistrationForm), name='django_registration_register'),
     path('accounts/', include('django_registration.backends.activation.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
 ]

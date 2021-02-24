@@ -128,7 +128,7 @@ STATIC_URL = '/static/'
 LOGIN_REDIRECT_URL = reverse_lazy('camp:start')
 LOGIN_URL = reverse_lazy('django.contrib.auth:login')
 LOGOUT_URL = reverse_lazy('django.contrib.auth:logout')
-
+AUTH_USER_MODEL = 'camp.User'
 
 #EMAIL settings
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
