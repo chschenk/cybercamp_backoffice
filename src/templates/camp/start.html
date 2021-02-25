@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% load bootstrap4 %}
+{% load i18n %}
+
+{% block title %}Start{% endblock %}
+{% block header %}
+{% if user.is_authenticated %}
+	Hallo {{user}}
+{% else %}
+	Cybercamp 2021
+{% endif %}
+{% endblock %}
+{% block body %}
+{% if user.is_authenticated %}
+	Was möchtest du tun?
+	<ul>
+		<li>Zum Cybercamp</li>
+		<li>Zur Workshop Übersicht</li>
+		<li>Einen Workshop einreichen</li>
+		<li>An der Cybercamp Map mitbauen</li>
+	</ul>
+{% else %}
+	Cybercamp 2021
+{% endif %}
+
+{% endblock %}

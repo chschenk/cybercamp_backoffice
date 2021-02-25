@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% load bootstrap4 %}
+{% load i18n %}
+
+{% block title %}Cybercamp Login{% endblock %}
+{% block header %}Cybercamp Login{% endblock %}
+{% block body %}
+    <form method="post" class="form">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        {% buttons %}
+            <button type="submit" class="btn btn-primary">Login</button>
+        {% endbuttons %}
+    </form>
+<p>Du hast dein Passwort vergessen? Setze es <a href="{% url 'password_reset' %}">hier</a> zurück.</p>
+<p>Du hast dich noch nicht für das Cybercamp angemeldet? <a href="{% url 'django_registration_register' %}">Dann aber schnell!</a></p>
+{% endblock %}
