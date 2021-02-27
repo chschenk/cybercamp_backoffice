@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 from django.urls import reverse_lazy
+from django.utils.crypto import get_random_string
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -20,12 +21,28 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '@l6m%gpmy&^!bl_ph$sk&#74aicmj$02hh^03br3_a5%+@#a%l'
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', None)
+if SECRET_KEY is None:
+    SECRET_FILE = os.path.join(BASE_DIR, '.secret')
+    if os.path.exists(SECRET_FILE):
+        with open(SECRET_FILE, 'r') as f:
+            SECRET_KEY = f.read().strip()
+    else:
+        chars = 'abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*(-_=+)'
+        SECRET_KEY = get_random_string(50, chars)
+        with open(SECRET_FILE, 'w') as f:
+            os.chmod(SECRET_FILE, 0o600)
+            try:
+                os.chown(SECRET_FILE, os.getuid(), os.getgid())
+            except AttributeError:
+                pass  # os.chown is not available on Windows
+            f.write(SECRET_KEY)
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [] if os.environ.get('DJANGO_ALLOWED_HOSTS', None) is None else os.environ.get('DJANGO_ALLOWED_HOSTS', None).split(',')
 
 
 # Application definition
