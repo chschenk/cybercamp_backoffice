@@ -1,6 +1,6 @@
 from django.views.generic import TemplateView, RedirectView
 from django.views import View
-from django.http import JsonResponse, HttpResponseNotFound
+from django.http import JsonResponse, HttpResponseNotFound, HttpResponseForbidden
 from django.core.signing import Signer, BadSignature
 from django.shortcuts import get_object_or_404
 from django.conf import settings
@@ -29,6 +29,9 @@ class LoginUrlView(View):
     Login User and return start Map etc
     """
     def get(self, request, login_token):
+        if self.request.headers.get('Authorization') != settings.ADMIN_API_TOKEN:
+            return HttpResponseForbidden('Not authenticated')
+
         try:
             uuid = Signer().unsign(login_token)
 
@@ -68,6 +71,9 @@ class MapView(View):
     USE_TAGS_POLICY = 3
 
     def get(self, request):
+        if self.request.headers.get('Authorization') != settings.ADMIN_API_TOKEN:
+            return HttpResponseForbidden('Not authenticated')
+
         organization_slug = request.GET.get('organizationSlug')
         world_slug = request.GET.get('worldSlug')
         room_slug = request.GET.get('roomSlug')
@@ -120,6 +126,9 @@ class MembershipView(View):
     Check if user is available
     """
     def get(self, request, user_id):
+        if self.request.headers.get('Authorization') != settings.ADMIN_API_TOKEN:
+            return HttpResponseForbidden('Not authenticated')
+
         user = User.objects.filter(uuid=uuid)[:1]
 
         if user:
@@ -170,6 +179,9 @@ class CheckUserView(View):
     Check if user is available
     """
     def get(self, request, user_id):
+        if self.request.headers.get('Authorization') != settings.ADMIN_API_TOKEN:
+            return HttpResponseForbidden('Not authenticated')
+
         user = User.objects.filter(uuid=uuid)[:1]
 
         if user:
@@ -186,6 +198,9 @@ class CheckModerateUserView(View):
     Check if user is available
     """
     def get(self, request, organization_slug, world_slug):
+        if self.request.headers.get('Authorization') != settings.ADMIN_API_TOKEN:
+            return HttpResponseForbidden('Not authenticated')
+
         admin_banned_data = {
             'is_banned': False,
             'message': '',  # Never Read :/
