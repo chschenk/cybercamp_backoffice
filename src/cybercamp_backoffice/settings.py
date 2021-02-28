@@ -152,3 +152,6 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 #django-registration settings
 ACCOUNT_ACTIVATION_DAYS = 2
+
+WORK_ADVENTURE_URL = 'https://play.cybercamp-test.rover.camp/'
+ALLOW_ANONYMOUS_LOGIN_INTO_WORKADVENTURE = False
