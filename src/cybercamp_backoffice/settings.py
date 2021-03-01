@@ -97,8 +97,12 @@ WSGI_APPLICATION = 'cybercamp_backoffice.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.' + os.environ.get('DJANGO_DB_BACKEND', 'sqlite3'),
+        'NAME': os.environ.get('DJANGO_DB_NAME', os.path.join(BASE_DIR, 'db.sqlite3')),
+        'USER': os.environ.get('DJANGO_DB_USER', ''),
+        'PASSWORD': os.environ.get('DJANGO_DB_PASSWORD', ''),
+        'HOST': os.environ.get('DJANGO_DB_HOST', ''),
+        'PORT': os.environ.get('DJANGO_DB_PORT', ''),
     }
 }
 
