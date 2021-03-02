@@ -35,28 +35,24 @@ class LoginUrlView(View):
         try:
             uuid = Signer().unsign(login_token)
 
-            user = User.objects.filter(uuid=uuid)[:1]
-            if user:
-                user = user.get()
-                admin_api_data = {
-                    'userUuid': user.wa_uuid,
-                    'organizationSlug': user.wa_organization,
-                    'worldSlug': user.wa_world,
-                    'roomSlug': user.wa_room,
-                    'mapUrlStart': "",  # never read !
-                    'textures': [  # TODO: add to database
-                        {
-                            'id': 2,
-                            'level': 6,
-                            'url': 'resources/characters/pipoya/Headmaster male.png'
-                        }
-                    ],
-                    'playerName': user.username,
-                    'characterLayers': ["customCharacterTexture2"],  # TODO: add to database
-                }
-                return JsonResponse(admin_api_data)
-            else:
-                return HttpResponseNotFound('User unknown')
+            user = get_object_or_404(User, wa_uuid=uuid)
+            admin_api_data = {
+                'userUuid': user.wa_uuid,
+                'organizationSlug': user.wa_organization,
+                'worldSlug': user.wa_world,
+                'roomSlug': user.wa_room,
+                'mapUrlStart': "",  # never read !
+                'textures': [  # TODO: add to database
+                    {
+                        'id': 2,
+                        'level': 6,
+                        'url': 'resources/characters/pipoya/Headmaster male.png'
+                    }
+                ],
+                'playerName': user.username,
+                'characterLayers': ["customCharacterTexture2"],  # TODO: add to database
+            }
+            return JsonResponse(admin_api_data)
         except BadSignature:
             return HttpResponseNotFound('User unknown')
 
@@ -129,7 +125,7 @@ class MembershipView(View):
         if self.request.headers.get('Authorization') != settings.ADMIN_API_TOKEN:
             return HttpResponseForbidden('Not authenticated')
 
-        user = User.objects.filter(uuid=uuid)[:1]
+        user = User.objects.filter(wa_uuid=user_id)[:1]
 
         if user:
             user = user.get()
@@ -182,15 +178,12 @@ class CheckUserView(View):
         if self.request.headers.get('Authorization') != settings.ADMIN_API_TOKEN:
             return HttpResponseForbidden('Not authenticated')
 
-        user = User.objects.filter(uuid=uuid)[:1]
+        user = get_object_or_404(User, wa_uuid=user_id)
 
-        if user:
-            user_data = {
-                'userUuid': user_id,  # never Read, but to identify
-            }
-            return JsonResponse(user_data)
-        else:
-            return HttpResponseNotFound('User unknown')
+        user_data = {
+            'userUuid': user_id,  # never Read, but to identify
+        }
+        return JsonResponse(user_data)
 
 
 class CheckModerateUserView(View):
