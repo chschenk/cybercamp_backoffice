@@ -6,6 +6,12 @@
 {% block title %}Cybercamp Anmeldung{% endblock %}
 {% block header %}Cybercamp Anmeldung{% endblock %}
 {% block body %}
+{% if form.errors %}
+    <div class="alert alert-danger" role="alert">
+        {{ form.errors }}
+    </div>
+{% endif %}
+
     <form method="post" class="form">
         {% csrf_token %}
         {% bootstrap_form form %}

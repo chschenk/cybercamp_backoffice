@@ -1,5 +1,13 @@
-Hallo bla
+Hallo {{user}},
 
-http://{{ site.domain }}{% url 'django_registration_activate' activation_key %}
+danke, dass du dich beim Cybercamp angemeldet hast!
+
+Um deine Anmeldung zu bestätigen klicke noch auf folgenden Link:
+
+{{scheme}}://{{ site.domain }}{% url 'django_registration_activate' activation_key %}
 
 Der Link ist für {{ expiration_days }} Tage gültig.
+
+Gut Pfad
+
+Dein Cybercamp Team
