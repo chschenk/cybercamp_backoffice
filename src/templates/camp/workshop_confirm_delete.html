@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% load bootstrap4 %}
+{% load i18n %}
+
+{% block title %}Workshop "{{ object.name }}" löschen?{% endblock %}
+{% block header %}
+Workshop "{{ object.name }}" löschen?
+{% endblock %}
+{% block body %}
+	<form method="post">{% csrf_token %}
+		<p>Willst du den Workshop "{{ object.name }}" wirklich löschen?</p>
+		<a href="{{ cancel_url }}"><button type="button" class="btn btn-primary">Abbrechen</button></a>
+		<input class="btn btn-danger" type="submit" value="Löschen"/>
+	</form>
+
+{% endblock %}

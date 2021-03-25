@@ -1,11 +1,13 @@
-from django.views.generic import TemplateView, RedirectView
+from django.views.generic import TemplateView, RedirectView, CreateView, ListView, DetailView, UpdateView, DeleteView
 from django.views import View
 from django.http import JsonResponse, HttpResponseNotFound, HttpResponseForbidden
 from django.core.signing import Signer, BadSignature
 from django.shortcuts import get_object_or_404
 from django.conf import settings
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.urls import reverse_lazy
 
-from cybercamp_backoffice.camp.models import Map, User
+from cybercamp_backoffice.camp.models import Map, User, Workshop
 
 
 class StartView(TemplateView):
@@ -201,3 +203,48 @@ class CheckModerateUserView(View):
         return JsonResponse(admin_banned_data)
 
 
+class WorkshopCreateView(LoginRequiredMixin, CreateView):
+    login_url = reverse_lazy('login')
+    success_url = reverse_lazy('camp:list_workshop')
+    model = Workshop
+    fields = ('name', 'description', 'start_time', 'end_time', 'location')
+
+    def form_valid(self, form):
+        form.instance.organizer = self.request.user
+        return super(WorkshopCreateView, self).form_valid(form)
+
+
+class WorkshopListView(LoginRequiredMixin, ListView):
+    login_url = reverse_lazy('login')
+    model = Workshop
+
+
+class MyWorkshopListView(LoginRequiredMixin, ListView):
+    login_url = reverse_lazy('login')
+    model = Workshop
+    def get_queryset(self):
+        qs = super().get_queryset()
+        return qs.filter(organizer=self.request.user)
+
+
+class WorkshopDetailView(LoginRequiredMixin, DetailView):
+    login_url = reverse_lazy('login')
+    model = Workshop
+
+
+class WorkshopUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    login_url = reverse_lazy('login')
+    success_url = reverse_lazy('camp:list_workshop')
+    model = Workshop
+    fields = ('name', 'description', 'start_time', 'end_time', 'location')
+
+    def test_func(self):
+        return self.request.user.pk == self.get_object().organizer.pk
+
+class WorkshopDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    login_url = reverse_lazy('login')
+    success_url = reverse_lazy('camp:list_workshop')
+    model = Workshop
+
+    def test_func(self):
+        return self.request.user.pk == self.get_object().organizer.pk

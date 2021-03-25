@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% load bootstrap4 %}
+{% load i18n %}
+
+{% block title %}Workshop Übersicht{% endblock %}
+{% block header %}
+Workshop Übersicht
+{% endblock %}
+{% block body %}
+{% if object_list %}
+	<table class="table">
+		<thead class="thead-dark">
+			<tr>
+				<th scope="col">Name</th>
+				<th scope="col">Beschreibung</th>
+				<th scope="col">Von</th>
+				<th scope="col">Bis</th>
+				<th scope="col">Ort</th>
+				<th scope="col">Veranstalter</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for workshop in object_list %}
+				<tr>
+					<th scope="row"><a href="{% url 'camp:detail_workshop' workshop.id %}">{{ workshop.name }}</a></th>
+					<td>{{ workshop.description }}</td>
+					<td>{{ workshop.start_time }}</td>
+					<td>{{ workshop.end_time }}</td>
+					<td>{% if workshop.location %} {{ workshop.location }} {% else %} Noch kein Ort verfügbar {% endif %}</td>
+					<td>{{ workshop.organizer }}</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+{% else %}
+	Keine Workshops vorhanden!</br>
+{% endif %}
+<a href="{% url 'camp:create_workshop' %}">Workshop einreichen</a></br>
+{% endblock %}

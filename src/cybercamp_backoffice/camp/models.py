@@ -36,3 +36,12 @@ class Map(models.Model):
 							help_text='if not set, will be added from request to map_url')
 	map_url = models.URLField()
 	policy = models.IntegerField(choices=policy_type_choices)
+
+
+class Workshop(models.Model):
+	name = models.CharField(max_length=50, verbose_name='Name')
+	organizer = models.ForeignKey(User, on_delete=models.CASCADE)
+	description = models.TextField(verbose_name='Beschreibung', help_text='Eine Beschreibung für deinen Workshop')
+	start_time = models.DateTimeField(verbose_name='Von', help_text='Wann beginnt dein Workshop?')
+	end_time = models.DateTimeField(verbose_name='Bis', help_text='Bis wann geht dein Workshop?')
+	location = models.TextField(null=True, blank=True, verbose_name='Ort', help_text='Wo findet dein Workshop statt? Falls du keine Ahnung hast wo du deinen Workshop statt finden lassen kannst, lass dieses Feld einfach leer, dann weisen wir dir einen Ort zu.')

@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% load bootstrap4 %}
+{% load i18n %}
+
+{% block title %}Workshop: {{ object.name }}{% endblock %}
+{% block header %}
+Workshop: {{ object.name }}
+{% endblock %}
+{% block body %}
+<table class="table">
+	<tbody>
+			<tr>
+				<th scope="row">Name</th>
+				<td>{{ workshop.name }}</td>
+			</tr>
+			<tr>
+				<th scope="row">Beschreibung</th>
+				<td>{{ workshop.description }}</td>
+			</tr>
+			<tr>
+				<th scope="row">Von</th>
+				<td>{{ workshop.start_time }}</td>
+			</tr>
+			<tr>
+				<th scope="row">Bis</th>
+				<td>{{ workshop.end_time }}</td>
+			</tr>
+			<tr>
+				<th scope="row">Ort</th>
+				<td>{% if workshop.location %} {{ workshop.location }} {% else %} Noch kein Ort verfügbar {% endif %}</td>
+			</tr>
+			<tr>
+				<th scope="row">Veranstalter</th>
+				<td>{{ workshop.organizer }}</td>
+			</tr>
+	</tbody>
+</table>
+{% if user == workshop.organizer %}
+	<a href="{% url 'camp:update_workshop' workshop.pk %}">Workshop bearbeiten</a></br>
+	<a href="{% url 'camp:delete_workshop' workshop.pk %}">Workshop löschen</a>
+{% endif %}
+
+{% endblock %}

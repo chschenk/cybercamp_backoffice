@@ -42,10 +42,13 @@
 							<a class="nav-link" href="{#% url 'camp:timetable' %#}">Zeitplan</a>
 						</li>
 						<li class="nav-item {% block workshop_active %}{% endblock %}">
-							<a class="nav-link" href="{#% url 'camp:list-workshops' %#}">Workshop Übersicht</a>
+							<a class="nav-link" href="{% url 'camp:list_workshop' %}">Workshop Übersicht</a>
+						</li>
+						<li class="nav-item {% block my_workshop_active %}{% endblock %}">
+							<a class="nav-link" href="{% url 'camp:my_workshop' %}">Meine Workshops</a>
 						</li>
 						<li class="nav-item {% block add_workshop_active %}{% endblock %}">
-							<a class="nav-link" href="{#% url 'camp:create-workshop' %#}">Workshop einreichen</a>
+							<a class="nav-link" href="{% url 'camp:create_workshop' %}">Workshop einreichen</a>
 						</li>
 					{% endif %}
 				</ul>

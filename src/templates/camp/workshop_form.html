@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% load bootstrap4 %}
+{% load i18n %}
+
+{% block title %}Neuen Workshop einreichen{% endblock %}
+{% block header %}
+Neuen Workshop einreichen
+{% endblock %}
+{% block body %}
+{% if form.errors %}
+    <div class="alert alert-danger" role="alert">
+        {{ form.errors }}
+    </div>
+{% endif %}
+
+    <form method="post" class="form">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        {% buttons %}
+            <button type="submit" class="btn btn-primary">Speichern</button>
+        {% endbuttons %}
+    </form>
+{% endblock %}
