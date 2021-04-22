@@ -144,6 +144,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.environ.get('DJANGO_STATIC_ROOT', './static')
 
 #Auth settings
 LOGIN_REDIRECT_URL = reverse_lazy('camp:start')
