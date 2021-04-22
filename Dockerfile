@@ -4,11 +4,11 @@ ENV PYTHONUNBUFFERED=1
 WORKDIR /app
 #COPY ./src/requirements.txt /app/
 COPY ./src/ /app/
+COPY docker-entrypoint.sh /docker-entrypoint.sh
 RUN pip install --upgrade pip
 RUN pip install -r /app/requirements.txt
 RUN pip install gunicorn
 
 EXPOSE 8000
 
-CMD ["gunicorn", "--bind", ":8000", "cybercamp_backoffice.wsgi:application"]
-
+ENTRYPOINT ["/docker-entrypoint.sh"]
