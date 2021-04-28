@@ -1,6 +1,6 @@
 #!/bin/sh
-python manage.py migrate                  # Apply database migrations
-python manage.py collectstatic --noinput  # Collect static files
+python manage.py migrate --noinput
+python manage.py collectstatic --noinput
 
 # Start Gunicorn processes
 exec gunicorn cybercamp_backoffice.wsgi:application \
