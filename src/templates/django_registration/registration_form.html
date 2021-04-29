@@ -14,8 +14,16 @@
 
     <form method="post" class="form">
         {% csrf_token %}
-        {% bootstrap_form form %}
+        {% for field in form %}
+            {% if field.name == 'accept_privacy_policy' %}
+                {{ field }}
+                Du stimmst der Datenspeicherung im Rahmen unserer <a href="https://www.dpsg-paderborn.de/datenschutzerklaerung/">Datenschutzerklärung</a> zu
+            {% else %}
+                {% bootstrap_field field %}
+            {% endif %}
+        {% endfor %}
         {% buttons %}
+            </br>
             <button type="submit" class="btn btn-primary">Anmelden</button>
         {% endbuttons %}
     </form>
