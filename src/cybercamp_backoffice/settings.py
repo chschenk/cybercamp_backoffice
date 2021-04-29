@@ -160,6 +160,7 @@ EMAIL_HOST_USER = os.environ.get('DJANGO_EMAIL_USER', None)
 EMAIL_HOST_PASSWORD = os.environ.get('DJANGO_EMAIL_PASSWORD', None)
 EMAIL_USE_TLS = os.environ.get('DJANGO_EMAIL_USE_TLS', 'True').lower() in ['true', 'yes', '1']
 EMAIL_USE_SSL = os.environ.get('DJANGO_EMAIL_USE_SSL', 'False').lower() in ['true', 'yes', '1']
+DEFAULT_FROM_EMAIL = os.environ.get('DJANGO_EMAIL_FROM', 'webmaster@localhost')
 
 #django-registration settings
 ACCOUNT_ACTIVATION_DAYS = 2
