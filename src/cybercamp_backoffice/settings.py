@@ -153,7 +153,13 @@ LOGOUT_URL = reverse_lazy('django.contrib.auth:logout')
 AUTH_USER_MODEL = 'camp.User'
 
 #EMAIL settings
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.{}.EmailBackend'.format(os.environ.get('DJANGO_EMAIL_BACKEND', 'console'))
+EMAIL_HOST = os.environ.get('DJANGO_EMAIL_HOST', None)
+EMAIL_PORT = os.environ.get('DJANGO_EMAIL_PORT', None)
+EMAIL_HOST_USER = os.environ.get('DJANGO_EMAIL_USER', None)
+EMAIL_HOST_PASSWORD = os.environ.get('DJANGO_EMAIL_PASSWORD', None)
+EMAIL_USE_TLS = os.environ.get('DJANGO_EMAIL_USE_TLS', 'True').lower() in ['true', 'yes', '1']
+EMAIL_USE_SSL = os.environ.get('DJANGO_EMAIL_USE_SSL', 'False').lower() in ['true', 'yes', '1']
 
 #django-registration settings
 ACCOUNT_ACTIVATION_DAYS = 2
