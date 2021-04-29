@@ -12,11 +12,12 @@
 	<script src="{% static 'jquery/jquery-3.6.0.min.js' %}"></script>
 	<link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
 	<script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
-	<link rel="shortcut icon" type="image/png" href="{%  static 'favicon.ico' %}">
+	<link rel="shortcut icon" type="image/png" href="{%  static 'favicon/favicon.ico' %}">
+	<link rel="stylesheet" href="{% static 'cybercamp.css' %}">
 	{% block head %}{% endblock %}
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-danger">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 	<div class="container-fluid">
 		<!-- Header -->
 		<div class="navbar-header">
@@ -27,7 +28,7 @@
 
 		<!-- Items -->
 		<div class="collapse navbar-collapse" id="navbarToggler">
-			<a class="navbar-brand" href="{% url 'camp:start' %}">Cybercamp</a>
+			<a class="navbar-brand" href="{% url 'camp:start' %}"><img src="{% static 'images/cybercamp-2021_transparent.png' %}" alt="cybercamp_logo" height="70px"/></a>
 				<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
 					{% if user.is_authenticated %}
 						<li class="nav-item">
@@ -73,5 +74,12 @@
 	{% block body %}
 	{% endblock %}
 </div>
+<footer class="footer mt-auto py-3 bg-secondary">
+  <div class="container">
+    <span class="subnav">
+			<a href="https://rover.camp/rovercamp-2021">Was ist das hier?</a> | &copy; <a href="https://rover.camp/">rovercamp</a> '21
+		</span>
+  </div>
+</footer>
 </body>
 </html>
