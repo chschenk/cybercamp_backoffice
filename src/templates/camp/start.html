@@ -12,19 +12,15 @@
 {% endblock %}
 {% block body %}
 {% if user.is_authenticated %}
-	Was möchtest du tun?
-	<ul>
-        <li><a href="/goToCybercamp">Zum Cybercamp</a></li>
-		<li>Zur Workshop Übersicht</li>
-		<li>Einen Workshop einreichen</li>
-		<li>An der Cybercamp Map mitbauen</li>
-	</ul>
+	<img src="{% static 'images/cybercamp-2021_transparent.png' %}" class="img-fluid" alt="cybercamp_logo"/>
+	<a class="play mb-4" href="{% url 'camp:go_to_cybercamp' %}">Start Game<span class="blinking-cursor">&raquo;</span></a>
+	<a class="play mb-4" href="{% url 'camp:go_to_cybercamp' %}">Workshops<span class="blinking-cursor">&raquo;</span></a>
+	<a class="play mb-4" href="{% url 'camp:go_to_cybercamp' %}">Workshop einreichen<span class="blinking-cursor">&raquo;</span></a>
 {% else %}
 	<img src="{% static 'images/cybercamp-2021_transparent.png' %}" class="img-fluid" alt="cybercamp_logo"/>
-	<a class="play" href="https://play.cyber.rover.camp/">
+	<a class="play mb-4" href="{% url 'login' %}">
 		Start Game <span class="blinking-cursor">&raquo;</span>
 	</a>
-</br>
 {% endif %}
 
 {% endblock %}
