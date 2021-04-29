@@ -2,13 +2,12 @@
 
 {% load bootstrap4 %}
 {% load i18n %}
+{% load static %}
 
 {% block title %}Start{% endblock %}
 {% block header %}
 {% if user.is_authenticated %}
 	Hallo {{user}}
-{% else %}
-	Cybercamp 2021
 {% endif %}
 {% endblock %}
 {% block body %}
@@ -21,7 +20,11 @@
 		<li>An der Cybercamp Map mitbauen</li>
 	</ul>
 {% else %}
-	Cybercamp 2021
+	<img src="{% static 'images/cybercamp-2021_transparent.png' %}" class="img-fluid" alt="cybercamp_logo"/>
+	<a class="play" href="https://play.cyber.rover.camp/">
+		Start Game <span class="blinking-cursor">&raquo;</span>
+	</a>
+</br>
 {% endif %}
 
 {% endblock %}
