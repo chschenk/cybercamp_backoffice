@@ -40,7 +40,7 @@ if SECRET_KEY is None:
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DJANGO_DEBUG', 'False').lower() in ['true', 'yes', '1']
 
 ALLOWED_HOSTS = [] if os.environ.get('DJANGO_ALLOWED_HOSTS', None) is None else os.environ.get('DJANGO_ALLOWED_HOSTS', None).split(',')
 
