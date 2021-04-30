@@ -36,7 +36,7 @@ Workshop: {{ object.name }}
 			</tr>
 	</tbody>
 </table>
-{% if user == workshop.organizer %}
+{% if user == workshop.organizer or user.is_staff %}
 	<a href="{% url 'camp:update_workshop' workshop.pk %}">Workshop bearbeiten</a></br>
 	<a href="{% url 'camp:delete_workshop' workshop.pk %}">Workshop löschen</a>
 {% endif %}

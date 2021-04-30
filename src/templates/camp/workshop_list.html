@@ -18,6 +18,7 @@ Workshop Übersicht
 				<th scope="col">Bis</th>
 				<th scope="col">Ort</th>
 				<th scope="col">Veranstalter</th>
+				{% if user.is_staff %}<th scope="col">Aktionen</th>{% endif %}
 			</tr>
 		</thead>
 		<tbody>
@@ -29,6 +30,12 @@ Workshop Übersicht
 					<td>{{ workshop.end_time }}</td>
 					<td>{% if workshop.location %} {{ workshop.location }} {% else %} Noch kein Ort verfügbar {% endif %}</td>
 					<td>{{ workshop.organizer }}</td>
+					{% if user.is_staff %}
+						<td>
+							<a href="{% url 'camp:update_workshop' workshop.pk %}">Workshop bearbeiten</a></br>
+							<a href="{% url 'camp:delete_workshop' workshop.pk %}">Workshop löschen</a>
+						</td>
+					{% endif %}
 				</tr>
 			{% endfor %}
 		</tbody>

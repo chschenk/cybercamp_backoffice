@@ -241,7 +241,7 @@ class WorkshopUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 	fields = ('name', 'description', 'start_time', 'end_time', 'location')
 
 	def test_func(self):
-		return self.request.user.pk == self.get_object().organizer.pk
+		return self.request.user.pk == self.get_object().organizer.pk or self.request.user.is_staff
 
 class WorkshopDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 	login_url = reverse_lazy('login')
@@ -249,4 +249,4 @@ class WorkshopDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 	model = Workshop
 
 	def test_func(self):
-		return self.request.user.pk == self.get_object().organizer.pk
+		return self.request.user.pk == self.get_object().organizer.pk or self.request.user.is_staff
