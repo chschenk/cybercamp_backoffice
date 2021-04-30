@@ -205,6 +205,8 @@ class WorkshopCreateView(LoginRequiredMixin, CreateView):
 class WorkshopListView(LoginRequiredMixin, ListView):
 	login_url = reverse_lazy('login')
 	model = Workshop
+	ordering = ['start_time']
+	paginate_by = 10
 	def get_queryset(self):
 		qs = super().get_queryset()
 		return qs.filter(end_time__gt=timezone.now()).order_by('start_time', 'name')
@@ -214,11 +216,14 @@ class PastWorkshopListView(LoginRequiredMixin, ListView):
 	login_url = reverse_lazy('login')
 	model = Workshop
 	ordering = ['start_time']
+	paginate_by = 10
 
 
 class MyWorkshopListView(LoginRequiredMixin, ListView):
 	login_url = reverse_lazy('login')
 	model = Workshop
+	ordering = ['start_time']
+	paginate_by = 10
 	def get_queryset(self):
 		qs = super().get_queryset()
 		return qs.filter(organizer=self.request.user)
