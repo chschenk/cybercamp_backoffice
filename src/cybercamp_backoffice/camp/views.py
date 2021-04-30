@@ -104,19 +104,7 @@ class MapView(View):
 
 			return JsonResponse(map_data)
 		else:
-			if organization_slug == 'scoutnet':
-				map_data = {
-					'organizationSlug': organization_slug,  # Never Read, but to identify
-					'worldSlug': world_slug,  # Never Read, but to identify
-					'roomSlug': room_slug,  # Never Read, but to identify
-					'mapUrl': "https://maps.scoutnet.im/$worldSlug/$roomSlug",
-					'tags': ['scoutnet'],
-					'policy_type': self.USE_TAGS_POLICY,
-				}
-
-				return JsonResponse(map_data)
-			else:
-				return HttpResponseNotFound('Unknown Map')
+			return HttpResponseNotFound('Unknown Map')
 
 
 class MembershipView(View):
