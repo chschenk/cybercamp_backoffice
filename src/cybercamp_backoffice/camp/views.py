@@ -210,6 +210,12 @@ class WorkshopListView(LoginRequiredMixin, ListView):
 		return qs.filter(end_time__gt=timezone.now()).order_by('start_time', 'name')
 
 
+class PastWorkshopListView(LoginRequiredMixin, ListView):
+	login_url = reverse_lazy('login')
+	model = Workshop
+	ordering = ['start_time']
+
+
 class MyWorkshopListView(LoginRequiredMixin, ListView):
 	login_url = reverse_lazy('login')
 	model = Workshop
