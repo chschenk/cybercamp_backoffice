@@ -6,7 +6,7 @@ from django.shortcuts import get_object_or_404
 from django.conf import settings
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.urls import reverse_lazy
-from datetime import datetime
+from django.utils import timezone
 from cybercamp_backoffice.camp.models import Map, User, Workshop
 
 
@@ -207,7 +207,7 @@ class WorkshopListView(LoginRequiredMixin, ListView):
 	model = Workshop
 	def get_queryset(self):
 		qs = super().get_queryset()
-		return qs.filter(end_time__gt=datetime.now()).order_by('start_time', 'name')
+		return qs.filter(end_time__gt=timezone.now()).order_by('start_time', 'name')
 
 
 class MyWorkshopListView(LoginRequiredMixin, ListView):
