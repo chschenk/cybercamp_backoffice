@@ -14,8 +14,8 @@
 {% if user.is_authenticated %}
 	<img src="{% static 'images/cybercamp-2021_transparent.png' %}" class="img-fluid" alt="cybercamp_logo"/>
 	<a class="play mb-4" href="{% url 'camp:go_to_cybercamp' %}">Start Game<span class="blinking-cursor">&raquo;</span></a>
-	<a class="play mb-4" href="{% url 'camp:go_to_cybercamp' %}">Workshops<span class="blinking-cursor">&raquo;</span></a>
-	<a class="play mb-4" href="{% url 'camp:go_to_cybercamp' %}">Workshop einreichen<span class="blinking-cursor">&raquo;</span></a>
+	<a class="play mb-4" href="{% url 'camp:list_workshop' %}">Workshops<span class="blinking-cursor">&raquo;</span></a>
+	<a class="play mb-4" href="{% url 'camp:create_workshop' %}">Workshop einreichen<span class="blinking-cursor">&raquo;</span></a>
 {% else %}
 	<img src="{% static 'images/cybercamp-2021_transparent.png' %}" class="img-fluid" alt="cybercamp_logo"/>
 	<a class="play mb-4" href="{% url 'login' %}">
