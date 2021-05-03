@@ -220,7 +220,9 @@ class PastWorkshopListView(LoginRequiredMixin, ListView):
 	model = Workshop
 	ordering = ['start_time']
 	paginate_by = 10
-
+	def get_queryset(self):
+		qs = super().get_queryset()
+		return qs.filter(end_time__lte=timezone.now()).order_by('start_time', 'name')
 
 class MyWorkshopListView(LoginRequiredMixin, ListView):
 	login_url = reverse_lazy('login')
