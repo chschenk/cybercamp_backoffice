@@ -24,6 +24,14 @@ a.play:hover {
     color: #2bb962;
     animation: 1.5s blink step-end infinite;
 }
+@keyframes "blink" {
+    from, to {
+        color: transparent;
+    }
+    50% {
+        color: #a8db1a;
+    }
+}
 span.subnav, span.subnav a {
 	padding: 30px 0;
 	color: white;
