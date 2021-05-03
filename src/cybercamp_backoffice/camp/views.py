@@ -5,6 +5,7 @@ from django.core.signing import Signer, BadSignature
 from django.shortcuts import get_object_or_404
 from django.conf import settings
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
 from django.utils import timezone
 from cybercamp_backoffice.camp.models import Map, User, Workshop
@@ -191,9 +192,10 @@ class CheckModerateUserView(View):
 		return JsonResponse(admin_banned_data)
 
 
-class WorkshopCreateView(LoginRequiredMixin, CreateView):
+class WorkshopCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
 	login_url = reverse_lazy('login')
-	success_url = reverse_lazy('camp:list_workshop')
+	success_url = reverse_lazy('camp:my_workshop')
+	success_message = 'Der Workshop "%(name)s" wurde erfolgreich erstellt!'
 	model = Workshop
 	fields = ('name', 'description', 'start_time', 'end_time', 'location')
 
