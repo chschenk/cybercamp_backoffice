@@ -3,9 +3,9 @@
 {% load bootstrap4 %}
 {% load i18n %}
 
-{% block title %}Workshop Übersicht{% endblock %}
+{% block title %}Vergangene Workshops{% endblock %}
 {% block header %}
-Workshop Übersicht
+Vergangene Workshops
 {% endblock %}
 {% block body %}
 {% if object_list %}
@@ -41,9 +41,8 @@ Workshop Übersicht
 		</tbody>
 	</table>
 	{% bootstrap_pagination page_obj%}
-	<a href="{% url 'camp:create_workshop' %}">Workshop einreichen</a></br>
 {% else %}
-	Leider sind noch keine Workshops vorhanden! Klicke <a href="{% url 'camp:create_workshop' %}">hier</a> um einen Workshop einzureichen.</br>
+	Es gibt noch keine vergangenen Workshops!</br>
 {% endif %}
-<a href="{% url 'camp:past_workshop' %}">Vergangene Workshops ansehen</a></br>
+<a href="{% url 'camp:create_workshop' %}">Workshop einreichen</a></br>
 {% endblock %}

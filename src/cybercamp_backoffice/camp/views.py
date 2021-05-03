@@ -216,6 +216,7 @@ class WorkshopListView(LoginRequiredMixin, ListView):
 
 class PastWorkshopListView(LoginRequiredMixin, ListView):
 	login_url = reverse_lazy('login')
+	template_name = "camp/workshop_list_past.html"
 	model = Workshop
 	ordering = ['start_time']
 	paginate_by = 10
@@ -223,6 +224,7 @@ class PastWorkshopListView(LoginRequiredMixin, ListView):
 
 class MyWorkshopListView(LoginRequiredMixin, ListView):
 	login_url = reverse_lazy('login')
+	template_name = "camp/workshop_list_my.html"
 	model = Workshop
 	ordering = ['start_time']
 	paginate_by = 10
