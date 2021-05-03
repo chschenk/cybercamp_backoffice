@@ -15,15 +15,13 @@ class StartView(TemplateView):
 	template_name = "camp/start.html"
 
 
-class GoToCybercampView(RedirectView):
+class GoToCybercampView(LoginRequiredMixin, RedirectView):
+	login_url = reverse_lazy('login')
 	permanent = False
 	query_string = False
 	pattern_name = 'cybercamp'
 
 	def get_redirect_url(self, *args, **kwargs):
-		if not self.request.user.is_authenticated:
-			return '/'
-
 		return settings.WORK_ADVENTURE_URL.rstrip('/') + '/register/' + Signer().sign(self.request.user.wa_uuid)
 
 
