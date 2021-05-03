@@ -32,7 +32,7 @@
 				<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
 					{% if user.is_authenticated %}
 						<li class="nav-item">
-							<a class="nav-link" href="">Zum Cybercamp</a>
+							<a class="nav-link" href="{% url 'camp:go_to_cybercamp' %}">Zum Cybercamp</a>
 						</li>
 						<li class="nav-item {% block workshop_active %}{% endblock %}">
 							<a class="nav-link" href="{% url 'camp:list_workshop' %}">Workshop Übersicht</a>
