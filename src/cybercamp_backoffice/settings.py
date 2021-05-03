@@ -148,8 +148,8 @@ STATIC_ROOT = os.environ.get('DJANGO_STATIC_ROOT', './static')
 
 #Auth settings
 LOGIN_REDIRECT_URL = reverse_lazy('camp:start')
-LOGIN_URL = reverse_lazy('django.contrib.auth:login')
-LOGOUT_URL = reverse_lazy('django.contrib.auth:logout')
+LOGIN_URL = reverse_lazy('login')
+LOGOUT_URL = reverse_lazy('logout')
 AUTH_USER_MODEL = 'camp.User'
 
 #EMAIL settings
