@@ -254,3 +254,6 @@ class WorkshopDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
 	def test_func(self):
 		return self.request.user.pk == self.get_object().organizer.pk or self.request.user.is_staff
+
+class AccountActivationView(TemplateView):
+	template_name = "camp/account_activation.html"

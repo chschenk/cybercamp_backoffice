@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% load bootstrap4 %}
+{% load i18n %}
+
+{% block title %}Account Aktivierung{% endblock %}
+{% block header %}
+Account Aktivierung
+{% endblock %}
+{% block body %}
+Klicke <a href="{% url 'django_registration_activate' activation_key %}">hier</a> um deinen Account zu aktivieren.
+{% endblock %}

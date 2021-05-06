@@ -1,7 +1,7 @@
 from django.urls import include, path
 from cybercamp_backoffice.camp.views import StartView, LoginUrlView, MapView, MembershipView, CheckUserView,\
     CheckModerateUserView, GoToCybercampView, WorkshopCreateView, WorkshopListView, WorkshopDetailView,\
-    WorkshopUpdateView, WorkshopDeleteView, MyWorkshopListView, PastWorkshopListView
+    WorkshopUpdateView, WorkshopDeleteView, MyWorkshopListView, PastWorkshopListView, AccountActivationView
 
 
 app_name = 'camp'
@@ -25,4 +25,5 @@ urlpatterns = [
     path('workshop/detail/<int:pk>', WorkshopDetailView.as_view(), name='detail_workshop'),
     path('workshop/update/<int:pk>', WorkshopUpdateView.as_view(), name='update_workshop'),
     path('workshop/delete/<int:pk>', WorkshopDeleteView.as_view(), name='delete_workshop'),
+    path('accountActivation/<str:activation_key>/', AccountActivationView.as_view(), name='activate_account'),
 ]
